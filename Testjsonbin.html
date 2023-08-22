@@ -1,0 +1,60 @@
+<html>
+<body>
+
+<h1>The Console Object</h1>
+<h2>The log() Method</h2>
+<p>Testing JSONBin".</p>
+
+<p id = 'para'> </p> 
+<p id = 'demo'> </p> 
+
+
+<script>
+
+function getJSONbin() {
+
+    console.log("Hello world ashvath");
+
+
+    let req = new XMLHttpRequest();
+
+    req.onreadystatechange = () => {
+        if (req.readyState == XMLHttpRequest.DONE) {
+            console.log(req.responseText);
+
+            document.getElementById("para").innerHTML = req.responseText;
+
+            var myResponse = JSON.parse(req.responseText);
+
+            console.log(myResponse);
+
+            var myObj = myResponse.record.Resturantlist;
+
+            console.log(myObj);
+
+            let text = "<table border='1'>"
+            for (let x in myObj) {
+                text += "<tr><td>" + myObj[x].restaurantName + "</td></tr>";
+            }
+            text += "</table>"    
+            document.getElementById("demo").innerHTML = text;
+
+        }
+    };
+
+    req.open("GET", "https://api.jsonbin.io/v3/b/64c1c7b5b89b1e2299c62466/latest", true);
+    req.setRequestHeader("X-Master-Key", "$2b$10$h4isnZxyYX93mmztN9zkFuddVAUDmTWGVMWM5tecQ3RChP5zUeEn.");
+    req.send();
+    
+}
+
+function updateJSONbin() {
+    
+}
+
+
+
+</script>
+
+</body>
+</html>
